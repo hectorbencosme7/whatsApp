@@ -1,12 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import {Button,StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
+
+  const [count,setCount] = useState(0);
+  // const clickHandler =() => {
+  //     console.log("Click Me pressed");
+  // }
+  const add = () => {
+    setCount(count+1);
+  };
+  const minus = () =>{
+    setCount(count-1);  
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider style= {styles.container}>    
+      <SafeAreaView>
+        
+        <Button title='Add' onPress={add}/>
+        <Text style={styles.label}>{count}</Text>
+        <Button title='Minus' onPress={minus}/>
+
+      </SafeAreaView>
+    </SafeAreaProvider>
+
   );
 }
 
@@ -17,4 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  label:{
+    color: 'black',
+    fontSize: 18
+  }
 });
