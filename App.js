@@ -1,21 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import {Button,StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
 
   const [count,setCount] = useState(0);
-  // const clickHandler =() => {
-  //     console.log("Click Me pressed");
-  // }
+
+  useEffect(()=>{
+    console.log('Im rendering');
+  },[count]);
+
   const add = () => {
     setCount(count+1);
   };
   const minus = () =>{
     setCount(count-1);  
   };
-
   return (
     <SafeAreaProvider style= {styles.container}>    
       <SafeAreaView>
@@ -28,6 +29,7 @@ export default function App() {
     </SafeAreaProvider>
 
   );
+  
 }
 
 const styles = StyleSheet.create({
