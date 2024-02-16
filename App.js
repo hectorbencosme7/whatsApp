@@ -67,8 +67,7 @@ export default function App() {
     return null; //We need this code since "onLayout" never gets re-called
   }
   console.log('render count!');
-  //console.log(appIsLoaded);
-  // setAppIsLoaded(false);
+  
   return ( 
     <SafeAreaProvider onLayout={onLayout}>    
 
