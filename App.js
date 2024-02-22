@@ -4,16 +4,12 @@ import {Button,StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import ChatListScreen from './Screens/ChatListScreen';
-import ChatSettingsScreen from './Screens/ChatSettingsScreen';
-
+import AppNavigator from './navigation/AppNavigator';
 
 
 SplashScreen.preventAutoHideAsync();
-const Stack = createStackNavigator();
+
 export default function App() {
 
   const [appIsLoaded,setAppIsLoaded] = useState(false);
@@ -69,15 +65,10 @@ export default function App() {
   console.log('render count!');
   
   return ( 
-    <SafeAreaProvider onLayout={onLayout}>    
+    <SafeAreaProvider styles={styles.container}
+    onLayout={onLayout}>    
 
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name = "Home" component={ChatListScreen} />
-            <Stack.Screen name = "ChatSettings" component={ChatSettingsScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-
+     <AppNavigator/>
       
     </SafeAreaProvider>
 
