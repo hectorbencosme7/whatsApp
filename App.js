@@ -67,11 +67,8 @@ export default function App() {
   return ( 
     <SafeAreaProvider styles={styles.container}
     onLayout={onLayout}>    
-
-     <AppNavigator/>
-      
+      <AppNavigator/>  
     </SafeAreaProvider>
-
   );
   
 }
