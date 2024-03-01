@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View, Text, StyleSheet, ImageBackground, Button, TextInput, TouchableOpacity} from "react-native";
 import backgroundImage from '../assets/Images/droplet.jpeg'
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,6 +9,9 @@ import colors from "../Constants/colors.js"
 const ChatScreen = props =>{
 
     const [messageText,setMessageText]=useState("");
+    const sendMessage = useCallback(()=>{
+        setMessageText("");
+    },[messageText]);
     return (
         <SafeAreaView style={styles.container}
         edges={['bottom','left','right']}>
@@ -24,7 +27,8 @@ const ChatScreen = props =>{
 
                 <TextInput style={styles.textbox}
                 value={messageText}
-                onChangeText={text=>{setMessageText(text)}}/>
+                onChangeText={text=>{setMessageText(text)}}
+                onSubmitEditing={sendMessage}/>
 
                 { messageText==="" && <TouchableOpacity 
                 style={styles.mediaButton} 
@@ -33,9 +37,9 @@ const ChatScreen = props =>{
                </TouchableOpacity>}
 
                { messageText!=="" && <TouchableOpacity 
-                style={styles.mediaButton} 
-                onPress={()=>{console.log("I was pressed")}}>
-                 <Feather name="send" size={24} color={colors.blue} />
+                style={{...styles.mediaButton,... styles.sendButton}} 
+                onPress={sendMessage}>
+                 <Feather name="send" size={20} color={'white'} />
                </TouchableOpacity>}
             </View>
         </SafeAreaView>
@@ -67,7 +71,14 @@ const styles = StyleSheet.create({
     mediaButton:{
         alignItems: 'center',
         justifyContent: 'center',
-        width: 35,
+        width: 35
+    },
+    sendButton: {
+        backgroundColor: colors.blue,
+        borderRadius: 50,
+        padding: 8,
+        width: 35
+
     }
 });
 export default ChatScreen;
