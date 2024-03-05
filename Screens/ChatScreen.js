@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { View, Text, StyleSheet, ImageBackground, Button, TextInput, TouchableOpacity} from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Button, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform} from "react-native";
 import backgroundImage from '../assets/Images/droplet.jpeg'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
@@ -12,14 +12,19 @@ const ChatScreen = props =>{
     const sendMessage = useCallback(()=>{
         setMessageText("");
     },[messageText]);
+    //const [count,setCount]=useState(0);
     return (
-        <SafeAreaView style={styles.container}
+    <SafeAreaView style={styles.container}
         edges={['bottom','left','right']}>
-              <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 
-             </ImageBackground>  
 
-           
+        <KeyboardAvoidingView style={styles.screen}
+        behavior={Platform.OS === 'ios'? 'padding' : undefined}
+        keyboardVerticalOffset={100}>
+
+            <ImageBackground source={backgroundImage} 
+                style={styles.backgroundImage}></ImageBackground>
+
             <View style={styles.inputContainer}>
                <TouchableOpacity style={styles.mediaButton} onPress={()=>{console.log("I was pressed")}}>
                  <Feather name="plus" size={24} color={colors.blue} />
@@ -28,7 +33,9 @@ const ChatScreen = props =>{
                 <TextInput style={styles.textbox}
                 value={messageText}
                 onChangeText={text=>{setMessageText(text)}}
-                onSubmitEditing={sendMessage}/>
+                onSubmitEditing={()=>{
+                    sendMessage();
+                }}/>
 
                 { messageText==="" && <TouchableOpacity 
                 style={styles.mediaButton} 
@@ -41,8 +48,10 @@ const ChatScreen = props =>{
                 onPress={sendMessage}>
                  <Feather name="send" size={20} color={'white'} />
                </TouchableOpacity>}
+
             </View>
-        </SafeAreaView>
+        </KeyboardAvoidingView>
+    </SafeAreaView>
     )
 };
 
@@ -50,6 +59,9 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         flexDirection: 'column'
+    },
+    screen:{
+        flex:1
     },
     backgroundImage:{
         flex:1
