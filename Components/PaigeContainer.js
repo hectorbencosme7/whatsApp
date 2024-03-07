@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
 const PaigeContainer = props =>{
     return <View style={{...styles.container,...props.style}}>
