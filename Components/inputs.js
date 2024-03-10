@@ -6,14 +6,15 @@ import colors from "../Constants/colors";
 
 const Input = props =>{
     return <View style={styles.container}>
-            <Text>{props.label}</Text>
+            <Text style={styles.label}>{props.label}</Text>
             <View style={styles.inputContainer}>
              {   
                props.icon && <props.iconPack 
                name={props.icon} size={props.inconSize || 15} 
                style={styles.icon} />
              }
-             <TextInput/>
+             <TextInput 
+                    style={styles.input}/>
                 
             </View>
     </View>
@@ -24,6 +25,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         flex:1,
         backgroundColor: 'white'
+    },
+    label: {
+        marginVertical:8,
+        fontFamily: 'bold',
+        letterSpacing: 0.3,
+        color: colors.textColor
     },
     inputContainer:{
         width: '100%',
@@ -37,6 +44,13 @@ const styles = StyleSheet.create({
     icon:{
         marginRight: 10,
         color: colors.grey
+    },
+    input:{
+       color: colors.textColor,
+       flex: 1,
+       fontFamily: 'regular',
+       letterSpacing: 0.3,
+       paddingTop: 0
     }
 });
 

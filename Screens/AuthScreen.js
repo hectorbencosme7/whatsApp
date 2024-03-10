@@ -8,7 +8,7 @@ import { FontAwesome } from "@expo/vector-icons";
 const AuthScreen = props =>{
     return <SafeAreaView style={{flex:1}}>
                 <PaigeContainer style={{}}>
-                    <Input label="first name" icon="user-o" 
+                    <Input label="First name" icon="user-o" 
                     iconPack={FontAwesome}
                     />
                 </PaigeContainer>
